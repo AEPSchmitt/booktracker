@@ -11,7 +11,7 @@ Simple python plotly visualisation of the books I read.
 
 ( [download starter here](https://docs.google.com/spreadsheets/d/1SmtFQJw4FF7adj_B1clWbI8AHtPOJHwa4bOvNHtAcXE/copy) )
 
-2. Cover images for each book (.PNG only), placed in the **/covers/** folder and named exactly the same as the book title (without capital letters, and with spaces replaced by __underscores__)
+2. Cover images for each book as **.png** files, placed in the **/covers/** folder. Covers have to be named exactly the same as the book title, but without capital letters and with spaces replaced by __underscores__)
 
 # Example
 [A live example can be found here](https://aepschmitt.dk/books/timeline/)
