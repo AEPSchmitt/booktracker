@@ -2,7 +2,7 @@
 Simple python plotly visualisation of the books I read.
 
 # Requirements
-0. Python libraries: [**Plotly**]([https://plotly.com/python/](https://pypi.org/project/plotly/), [**Pillow**]([https://pillow.readthedocs.io/en/stable/](https://pypi.org/project/Pillow/), [**pandas**](https://pypi.org/project/pandas/)
+0. Python libraries: [**Plotly**](https://pypi.org/project/plotly/), [**Pillow**](https://pypi.org/project/Pillow/), [**pandas**](https://pypi.org/project/pandas/)
 1. A CSV file named **bookstats.csv**
 2. Cover images for each book (.PNG only), placed in the **/covers/** folder and named exactly the same as the book title (without capital letters, and with spaces replaced by __underscores__)
 
