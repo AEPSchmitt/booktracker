@@ -1,4 +1,8 @@
+
 # Booktracker
+
+https://github.com/AEPSchmitt/booktracker/assets/9079958/267777c1-0f31-46a6-801b-7252937187c8
+
 Keep track of the books you read using [Google Sheets](https://docs.google.com/spreadsheets/d/1SmtFQJw4FF7adj_B1clWbI8AHtPOJHwa4bOvNHtAcXE/copy).
 
 Export the sheet as **bookstats.csv** and feed that to **booktracker.py** for some interactive stats about your reading history.
