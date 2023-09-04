@@ -2,12 +2,12 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import pandas as pd
 import datetime
+import re
 from PIL import Image
 
 # Load data
 data = pd.read_csv('bookstats.csv')
 use_archive = False
-count_type = "PAGES" # WORDS OR PAGES
 
 # Build list of cover image paths from book titles
 book_number = 0
@@ -48,36 +48,50 @@ fig = make_subplots(
 )
 
 # TIMELINE
-if count_type == 'WORDS':
-    fig.add_trace(go.Scatter(x=dates, y=data['Words accumulated'], customdata=data, mode='markers+lines+text', text=data['Title'], line=dict(width=2),marker_size=10,marker_line_color="midnightblue",marker_line_width=2,textposition='top center', name='', hovertemplate="<b>%{text} (%{customdata[5]})</b><br>%{customdata[2]} <br><br>%{customdata[4]} pages<br>%{customdata[11]} words<br><br>Started: %{customdata[17]}<br>Finished: %{x}"), row=1, col=1)
-    fig.update_layout(
-        yaxis=dict(
-            title_text="Words",
-            titlefont=dict(size=30, family="Courier New, monospace"),
-        ),
-        title=dict(
-            text="Reading Timeline",
-            font=dict(size=80, family="Courier New, monospace")
-        )
+fig.add_trace(
+    go.Scatter(
+        x=dates,
+        y=data['Pages accumulated'],
+        customdata=data,
+        mode='markers+lines+text',
+        text=data['Title'],
+        line=dict(width=2),
+        marker_size=10,
+        marker_line_color="midnightblue",
+        marker_line_width=2,
+        textposition='top center',
+        name='',
+        hovertemplate='''
+    <b>%{text} (%{customdata[5]})</b>
+    <br>
+    %{customdata[2]}
+    <br>
+    %{customdata[4]} pages
+    <br>
+    <br>
+    Started: %{customdata[11]}<br>
+    Finished: %{x}
+    '''), row=1, col=1)
+fig.update_layout(
+    yaxis=dict(
+        title_text="Pages",
+        titlefont=dict(size=30, family="Courier New, monospace"),
+    ),
+    title=dict(
+        text="Reading Timeline",
+        font=dict(size=80, family="Courier New, monospace")
     )
-elif count_type == 'PAGES':
-    fig.add_trace(go.Scatter(x=dates, y=data['Pages accumulated'], customdata=data, mode='markers+lines+text', text=data['Title'], line=dict(width=2),marker_size=10,marker_line_color="midnightblue",marker_line_width=2,textposition='top center', name='', hovertemplate="<b>%{text} (%{customdata[5]})</b><br>%{customdata[2]} <br><br>%{customdata[4]} pages<br><br>Started: %{customdata[17]}<br>Finished: %{x}"), row=1, col=1)
-    fig.update_layout(
-        yaxis=dict(
-            title_text="Pages",
-            titlefont=dict(size=30, family="Courier New, monospace"),
-        ),
-        title=dict(
-            text="Reading Timeline",
-            font=dict(size=80, family="Courier New, monospace")
-        )
-    )
+)
 
 last_date = dates[-1]
 three_weeks = datetime.timedelta(days=21)
 upper_bound = last_date + three_weeks
 fig.update_xaxes(range=[dates[0], upper_bound])
-#fig.update_xaxes(showgrid=False)
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
+fig.update_xaxes(showspikes=True)
+fig.update_yaxes(showspikes=True)
+fig.update_layout(hovermode="y")
 fig.update_yaxes(zeroline=False)
 
 # COVER IMAGES (timeline)
@@ -86,39 +100,21 @@ y_increment = 1 / len(dates)
 y_index = y_increment
 #total_pages = data['Pages Accumulated'][len(dates)-1] # may be useful later for determining better height of cover images
 for cover in book_covers:
-    if count_type == 'WORDS':
-        #offset = -10000 if index % 2 == 0 else 500000
-        anchor = 'top' if index % 2 == 0 else 'bottom'
-        fig.add_layout_image(
-            dict(
-                source=Image.open(cover),
-                xref='x',
-                yref='y',
-                x=dates[index],
-                y=(data['Words accumulated'][index]),
-                sizex=20*24*60*60*1000,
-                sizey=1.6*20*24*60*60*1000,
-                xanchor='center',
-                yanchor=anchor,
-                layer='below'
-            )
+    anchor = 'top' if index % 2 == 0 else 'bottom'
+    fig.add_layout_image(
+        dict(
+            source=Image.open(cover),
+            xref='x',
+            yref='y',
+            x=dates[index],
+            y=(data['Pages accumulated'][index]),
+            sizex=20*24*60*60*1000,
+            sizey=1.6*20*24*60*60*10,
+            xanchor='center',
+            yanchor=anchor,
+            layer='below'
         )
-    elif count_type == 'PAGES':
-        anchor = 'top' if index % 2 == 0 else 'bottom'
-        fig.add_layout_image(
-            dict(
-                source=Image.open(cover),
-                xref='x',
-                yref='y',
-                x=dates[index],
-                y=(data['Pages accumulated'][index]),
-                sizex=20*24*60*60*1000,
-                sizey=1.6*20*24*60*60*10,
-                xanchor='center',
-                yanchor=anchor,
-                layer='below'
-            )
-        )
+    )
     index += 1
 
 # RELEASE YEAR BOXPLOT
