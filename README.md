@@ -15,7 +15,7 @@ Export the sheet as **bookstats.csv** and feed that to **booktracker.py** for so
 | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
 | string  | string  | string  | F/M  | int | int | YYYY-MM-DD | YYYY-MM-DD | int | int | Y/N | Month DD, YYYY |
 
-( [download starter here](https://docs.google.com/spreadsheets/d/1SmtFQJw4FF7adj_B1clWbI8AHtPOJHwa4bOvNHtAcXE/copy) )
+( [get sheet copy](https://docs.google.com/spreadsheets/d/1SmtFQJw4FF7adj_B1clWbI8AHtPOJHwa4bOvNHtAcXE/copy) )
 
 2. Cover images for each book as **.png** files, placed in the **/covers/** folder. Covers have to be named exactly the same as the book title, but without capital letters and with spaces replaced by __underscores__). Like this:
 ![bookcovers_example](https://github.com/AEPSchmitt/booktracker/assets/9079958/7c8c4c30-ef50-4940-aac4-1b3217be3430)
