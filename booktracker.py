@@ -277,7 +277,7 @@ fig.write_html("index.html")
         }
     </style>
     <div id="data-link">
-        <a href="bookstats.csv">source data</a>
+        <a href="https://github.com/AEPSchmitt/booktracker">source code</a>
     </div>
 
 '''
