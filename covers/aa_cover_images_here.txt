@@ -1,0 +1,6 @@
+Cover image requirements:
+- .PNG format
+- No more than 500px height
+- filename of the cover has to match the exact title of the book
+- filename cannot contain CAPITAL LETTERS
+- replace all spaces in the filename with underscores_
